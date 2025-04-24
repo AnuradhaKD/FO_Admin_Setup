@@ -1,0 +1,13 @@
+﻿@page "/home"
+@inject IJSRuntime JSRuntime
+
+<h3>JavaScript Module Example</h3>
+<button @onclick="ShowToast">Show Toast</button>
+
+@code {
+    private async Task ShowToast()
+    {
+        var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./sample.js");
+        await module.InvokeVoidAsync("showToast", "Hello from Blazor with .NET 9.0!");
+    }
+}
